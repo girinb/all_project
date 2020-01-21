@@ -1,4 +1,4 @@
-package com.bf.one.myapplication;
+package com.bf.one.myapmp3;
 
 public class MediaPlaybackService extends MediaBrowserServiceCompat {
     private static final String MY_MEDIA_ROOT_ID = "media_root_id";

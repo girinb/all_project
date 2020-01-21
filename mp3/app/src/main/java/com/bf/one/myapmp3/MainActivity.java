@@ -1,16 +1,13 @@
-package com.bf.one.myapplication;
+package com.bf.one.myapmp3;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     // MediaPlayer 객체생성
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //
             }
         });
-        FloatingActionButton fab2= findViewById(R.id.fab2);
+        FloatingActionButton fab2 = findViewById(R.id.fab2);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
