@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
         android:scaleType="fitXY"
-        android:src="@drawable/empty_albumart"/>
+        android:src="@drawable/empty_albumart" />
 
     <TextView
         android:id="@+id/txt_title"
@@ -21,33 +21,33 @@
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="Sample Title"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <ImageButton
         android:id="@+id/btn_player_rewind"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
-        android:src="@drawable/rewind"/>
+        android:src="@drawable/rewind" />
 
     <ImageButton
         android:id="@+id/btn_player_pause"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
-        android:src="@drawable/play"/>
+        android:src="@drawable/play" />
 
     <ImageButton
         android:id="@+id/btn_player_forward"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
-        android:src="@drawable/forward"/>
+        android:src="@drawable/forward" />
 
     <ImageButton
         android:id="@+id/btn_player_close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@null"
-        android:src="@drawable/close"/>
+        android:src="@drawable/close" />
 </LinearLayout>

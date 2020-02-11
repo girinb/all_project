@@ -21,26 +21,29 @@ import com.squareup.picasso.Picasso;
 public class playing_page extends AppCompatActivity {
 	private final static int LOADER_ID = 0x001;
 	int count = 0;
-	private ImageView mImgAlbumArt;
-	private TextView mTxtTitle;
 	ImageButton mBtnPlayPause;
 	SeekBar sb;
 	MyThread t_seeker;
 	TextView t_tv_nowtime;
-
-
+	final Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			t_tv_nowtime.setText(DateFormat.format("mm:ss", msg.what));
+		}
+	};
+	private ImageView mImgAlbumArt;
+	private TextView mTxtTitle;
 	private RemoteViews mRemoteViews;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.playing_page);
 		t_seeker = new MyThread();
-		mImgAlbumArt = (ImageView) findViewById(R.id.img_albumart);
-		mTxtTitle = (TextView) findViewById(R.id.txt_title);
-		mBtnPlayPause = (ImageButton) findViewById(R.id.btn_play_pause);
-		sb = (SeekBar) findViewById(R.id.seekBar);
+		mImgAlbumArt = findViewById(R.id.img_albumart);
+		mTxtTitle = findViewById(R.id.txt_title);
+		mBtnPlayPause = findViewById(R.id.btn_play_pause);
+		sb = findViewById(R.id.seekBar);
 		t_tv_nowtime = findViewById(R.id.tv_nowtime);
 		sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			public void onStopTrackingTouch(SeekBar seekBar) {
@@ -109,25 +112,15 @@ public class playing_page extends AppCompatActivity {
 
 	}
 
-	class MyThread extends Thread {
-		@Override
-		public void run() { // 쓰레드가 시작되면 콜백되는 메서드
-			while (AudioApplication.getInstance().getServiceInterface().isPlaying()) {
-				sb.setProgress(AudioService.getmp().getCurrentPosition());
-				handler.sendEmptyMessage(AudioService.getmp().getCurrentPosition());
-			}
-		}
-	}
-
 	private void updateUI() {
 		AudioAdapter.AudioItem audioItem = AudioApplication.getInstance().getServiceInterface().getAudioItem();
 		if (AudioApplication.getInstance().getServiceInterface().isPlaying()) {
 			mBtnPlayPause.setImageResource(R.drawable.pause);
-			TextView t_tv_album = (TextView) findViewById(R.id.tv_plating_album);
+			TextView t_tv_album = findViewById(R.id.tv_plating_album);
 			t_tv_album.setText("앨범: " + audioItem.mAlbum);
-			TextView t_tv_songer = (TextView) findViewById(R.id.tv_songer);
+			TextView t_tv_songer = findViewById(R.id.tv_songer);
 			t_tv_songer.setText("아티스트: " + audioItem.mArtist);
-			TextView t_tv_title = (TextView) findViewById(R.id.tv_playing_title);
+			TextView t_tv_title = findViewById(R.id.tv_playing_title);
 			t_tv_title.setText("타이틀: " + audioItem.mTitle);
 			TextView t_tv_fulltime = findViewById(R.id.tv_fulltime);
 			t_tv_fulltime.setText(DateFormat.format("mm:ss", audioItem.mDuration));
@@ -157,10 +150,13 @@ public class playing_page extends AppCompatActivity {
 		t_seeker.interrupt();
 	}
 
-	final Handler handler = new Handler() {
+	class MyThread extends Thread {
 		@Override
-		public void handleMessage(Message msg) {
-			t_tv_nowtime.setText(DateFormat.format("mm:ss",msg.what));
+		public void run() { // 쓰레드가 시작되면 콜백되는 메서드
+			while (AudioApplication.getInstance().getServiceInterface().isPlaying()) {
+				sb.setProgress(AudioService.getmp().getCurrentPosition());
+				handler.sendEmptyMessage(AudioService.getmp().getCurrentPosition());
+			}
+		}
 	}
-	};
 }

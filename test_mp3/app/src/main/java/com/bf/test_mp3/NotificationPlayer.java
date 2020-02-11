@@ -44,12 +44,13 @@ public class NotificationPlayer extends Application {
 //		isForeground = false;
 	}
 
+
 	private void cancel() {
 		if (mNotificationManagerBuilder != null) {
 			mNotificationManagerBuilder.cancel(true);
 			mNotificationManagerBuilder = null;
 		}
-		if(mNotificationManager != null) {
+		if (mNotificationManager != null) {
 			mNotificationManager.cancel(NOTIFICATION_PLAYER_ID);
 		}
 	}
@@ -86,6 +87,11 @@ public class NotificationPlayer extends Application {
 //	}
 
 	private class NotificationManagerBuilder extends AsyncTask<Void, Void, Notification> {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+			}
+		};
 		private RemoteViews mRemoteViews;
 		private NotificationCompat.Builder mNotificationBuilder;
 		private PendingIntent mMainPendingIntent;
@@ -117,11 +123,10 @@ public class NotificationPlayer extends Application {
 			}
 //			if (!isForeground) {
 //				isForeground = true;
-				mNotificationManager.notify(NOTIFICATION_PLAYER_ID, mNotificationBuilder.build());
+			mNotificationManager.notify(NOTIFICATION_PLAYER_ID, mNotificationBuilder.build());
 
 //			}
 		}
-
 
 		@Override
 		protected Notification doInBackground(Void... params) {
@@ -171,16 +176,14 @@ public class NotificationPlayer extends Application {
 			String title = mService.getAudioItem().mTitle;
 			remoteViews.setTextViewText(R.id.txt_title, title);
 			Uri albumArtUri = ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), mService.getAudioItem().mAlbumId);
-			Picasso.with(mService).load(albumArtUri).error(R.drawable.empty_albumart).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
-//			handler.sendMessage(albumArtUri,remoteViews,notification);
+			try {
+				Picasso.with(mService).load(albumArtUri).into(remoteViews, R.id.img_albumart, NOTIFICATION_PLAYER_ID, notification);
+			} catch (Exception e) {
+				remoteViews.setImageViewResource(R.id.img_albumart, R.drawable.empty_albumart);
+			}
+
 
 		}
-
-		final Handler handler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) {
-			}
-		};
 
 	}
 }

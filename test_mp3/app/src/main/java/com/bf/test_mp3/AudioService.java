@@ -14,23 +14,16 @@ import android.provider.MediaStore;
 import java.util.ArrayList;
 
 public class AudioService extends Service {
+	private static MediaPlayer mMediaPlayer;
 	private final IBinder mBinder = new AudioServiceBinder();
 	private ArrayList<Long> mAudioIds = new ArrayList<>();
-	private static MediaPlayer mMediaPlayer;
 	private boolean isPrepared;
 	private int mCurrentPosition;
 	private AudioAdapter.AudioItem mAudioItem;
 	private NotificationPlayer mNotificationPlayer;
 
-
-	public class AudioServiceBinder extends Binder {
-		AudioService getService() {
-			return AudioService.this;
-		}
-	}
-
-	public static MediaPlayer getmp(){
-			return mMediaPlayer;
+	public static MediaPlayer getmp() {
+		return mMediaPlayer;
 	}
 
 	@Override
@@ -77,7 +70,6 @@ public class AudioService extends Service {
 
 	}
 
-
 	@Override
 	public IBinder onBind(Intent intent) {
 		return mBinder;
@@ -94,15 +86,15 @@ public class AudioService extends Service {
 	}
 
 	private void updateNotificationPlayer() {
-			if (mNotificationPlayer != null) {
-				mNotificationPlayer.updateNotificationPlayer();
-			}
+		if (mNotificationPlayer != null) {
+			mNotificationPlayer.updateNotificationPlayer();
 		}
+	}
 
-		private void removeNotificationPlayer() {
-			if (mNotificationPlayer != null) {
-				mNotificationPlayer.removeNotificationPlayer();
-			}
+	private void removeNotificationPlayer() {
+		if (mNotificationPlayer != null) {
+			mNotificationPlayer.removeNotificationPlayer();
+		}
 	}
 
 	private void queryAudioItem(int position) {
@@ -155,7 +147,6 @@ public class AudioService extends Service {
 		}
 	}
 
-
 	public void play(int position) {
 		queryAudioItem(position);
 		stop();
@@ -167,6 +158,7 @@ public class AudioService extends Service {
 		if (isPrepared) {
 			mMediaPlayer.start();
 			sendBroadcast(new Intent(BroadcastActions.PLAY_STATE_CHANGED)); // 재생상태 변경 전송
+
 //			mMediaPlayer.setLooping(true);
 		}
 	}
@@ -207,12 +199,6 @@ public class AudioService extends Service {
 		return mMediaPlayer.isPlaying();
 	}
 
-
-	public class BroadcastActions {
-		public final static String PREPARED = "PREPARED";
-		public final static String PLAY_STATE_CHANGED = "PLAY_STATE_CHANGED";
-	}
-
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if (intent != null) {
@@ -235,6 +221,16 @@ public class AudioService extends Service {
 		return super.onStartCommand(intent, flags, startId);
 	}
 
+	public class AudioServiceBinder extends Binder {
+		AudioService getService() {
+			return AudioService.this;
+		}
+	}
+
+	public class BroadcastActions {
+		public final static String PREPARED = "PREPARED";
+		public final static String PLAY_STATE_CHANGED = "PLAY_STATE_CHANGED";
+	}
 
 
 }
