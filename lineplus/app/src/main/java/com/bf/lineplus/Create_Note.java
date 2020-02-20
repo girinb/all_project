@@ -25,13 +25,13 @@ public class Create_Note extends AppCompatActivity {
 
 		//각종 변수 선언부
 		TextInputLayout til_title = findViewById(R.id.til_title);
-		TextInputLayout til_subject = findViewById(R.id.til_subject);
+		TextInputLayout til_contents = findViewById(R.id.til_contents);
 		ImageButton ib_save = findViewById(R.id.ib_save);
 
 
 		//일단 내용을 가져옴
 		StringBuffer strb_title = new StringBuffer();
-		StringBuffer strb_subject = new StringBuffer();
+		StringBuffer strb_contents = new StringBuffer();
 
 		// XML 포맷으로 변형
 
@@ -44,18 +44,19 @@ public class Create_Note extends AppCompatActivity {
 
 				Snackbar.make(v, til_title.getEditText().getText(), Snackbar.LENGTH_LONG)
 						.setAction("Action", null).show();
+
 				try {
 					long now = System.currentTimeMillis();
 					Date mDate = new Date(now);
 					SimpleDateFormat simpleDate = new SimpleDateFormat("yyyyMMddhhmmss");
 					String getTime = simpleDate.format(mDate);
 
-//					FileOutputStream fos = openFileOutput
-//							(getTime+".txt", // 파일명 지정
-//									Context.MODE_APPEND);// 저장모드
-//					PrintWriter out = new PrintWriter(fos);
-//					out.println(data);
-//					out.close();
+					FileOutputStream fos = openFileOutput
+							(getTime+".txt", // 파일명 지정
+									Context.MODE_APPEND);// 저장모드
+					PrintWriter out = new PrintWriter(fos);
+					out.print("sss");
+					out.close();
 
 				} catch (Exception e) {
 					e.printStackTrace();

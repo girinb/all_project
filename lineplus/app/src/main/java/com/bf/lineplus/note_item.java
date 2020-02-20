@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class note_item {
 	String title;
-	String subject;
+	String contents;
 	ArrayList<String> imagelist;
-	note_item(String _title,String _subject,ArrayList<String> _imagelist){
+	note_item(String _title,String _contents,ArrayList<String> _imagelist){
 		title = _title;
-		subject = _subject;
+		contents = _contents;
 		imagelist = _imagelist;
 
 	}
@@ -25,16 +25,16 @@ public class note_item {
 		return imagelist;
 	}
 
-	public String getSubject() {
-		return subject;
+	public String getcontents() {
+		return contents;
 	}
 
 	public void setImagelist(ArrayList<String> imagelist) {
 		this.imagelist = imagelist;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setcontents(String contents) {
+		this.contents = contents;
 	}
 
 }
