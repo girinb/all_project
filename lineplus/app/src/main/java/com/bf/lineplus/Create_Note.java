@@ -41,10 +41,14 @@ public class Create_Note extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				TextInputLayout til_title = findViewById(R.id.til_title);
+                TextInputLayout til_contents = findViewById(R.id.til_contents);
+//				Snackbar.make(v, til_contents.getEditText().getText(), Snackbar.LENGTH_LONG)
+//						.setAction("Action", null).show();
+/*
+                xml DB 하나 만들고
+                TDB 따롷 하나 더
 
-				Snackbar.make(v, til_title.getEditText().getText(), Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-
+ */
 				try {
 					long now = System.currentTimeMillis();
 					Date mDate = new Date(now);
@@ -52,10 +56,10 @@ public class Create_Note extends AppCompatActivity {
 					String getTime = simpleDate.format(mDate);
 
 					FileOutputStream fos = openFileOutput
-							(getTime+".txt", // 파일명 지정
+							(getTime+".tdb", // 파일명 지정
 									Context.MODE_APPEND);// 저장모드
 					PrintWriter out = new PrintWriter(fos);
-					out.print("sss");
+					out.print(til_contents.getEditText().getText());
 					out.close();
 
 				} catch (Exception e) {

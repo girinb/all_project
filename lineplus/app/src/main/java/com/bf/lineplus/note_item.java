@@ -1,16 +1,32 @@
 package com.bf.lineplus;
 
-import java.util.ArrayList;
-
 public class note_item {
+	String date;
 	String title;
 	String contents;
-	ArrayList<String> imagelist;
-	note_item(String _title,String _contents,ArrayList<String> _imagelist){
+	String[] imagelist;
+	note_item(String _date,String _title,String _contents,String[]  _imagelist){
+		date = _date;
 		title = _title;
 		contents = _contents;
 		imagelist = _imagelist;
 
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+
+	public String getContents() {
+		return contents;
 	}
 
 	public String getTitle() {
@@ -21,16 +37,12 @@ public class note_item {
 		this.title = title;
 	}
 
-	public ArrayList<String> getImagelist() {
-		return imagelist;
-	}
-
-	public String getcontents() {
-		return contents;
-	}
-
-	public void setImagelist(ArrayList<String> imagelist) {
+	public void setImagelist(String[] imagelist) {
 		this.imagelist = imagelist;
+	}
+
+	public String[] getImagelist() {
+		return imagelist;
 	}
 
 	public void setcontents(String contents) {
