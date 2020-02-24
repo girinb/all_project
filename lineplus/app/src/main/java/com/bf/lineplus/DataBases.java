@@ -19,10 +19,10 @@ public final class DataBases {
         public static final String IMAGES = "IMAGES";
         public static final String _TABLENAME = "NOTEDB";
         public static final String _CREATE =
-                "create table "+_TABLENAME+"("
-                        +_ID+" integer primary key autoincrement, "
-                        +TITLE+" text not null , "
-                        +CONTENTS+" text not null , "
-                        +IMAGES+" text not null );";
+                "create table " + _TABLENAME + "("
+                        + _ID + " integer primary key autoincrement, "
+                        + TITLE + " text not null , "
+                        + CONTENTS + " text not null , "
+                        + IMAGES + " text not null );";
     }
 }

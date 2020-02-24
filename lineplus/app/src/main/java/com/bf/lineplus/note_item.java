@@ -1,52 +1,48 @@
 package com.bf.lineplus;
 
 public class note_item {
-	String date;
-	String title;
-	String contents;
-	String[] imagelist;
-	note_item(String _date,String _title,String _contents,String[]  _imagelist){
-		date = _date;
-		title = _title;
-		contents = _contents;
-		imagelist = _imagelist;
+    int id;
+    String title;
+    String contents;
+    String imagelist;
 
-	}
+    note_item(int _id, String _title, String _contents, String _imagelist) {
+        id = _id;
+        title = _title;
+        contents = _contents;
+        imagelist = _imagelist;
 
-	public String getDate() {
-		return date;
-	}
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public String getContents() {
+        return contents;
+    }
 
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
 
-	public String getContents() {
-		return contents;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getImagelist() {
+        return imagelist;
+    }
 
-	public void setImagelist(String[] imagelist) {
-		this.imagelist = imagelist;
-	}
+    public void setImagelist(String imagelist) {
+        this.imagelist = imagelist;
+    }
 
-	public String[] getImagelist() {
-		return imagelist;
-	}
+    public void setcontents(String contents) {
+        this.contents = contents;
+    }
 
-	public void setcontents(String contents) {
-		this.contents = contents;
-	}
-
+    public int getId() {
+        return id;
+    }
 }

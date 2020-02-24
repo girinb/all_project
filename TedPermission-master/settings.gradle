@@ -1,1 +1,0 @@
-include ':app', ':tedpermission', ':tedpermission-rx1', ':tedpermission-rx2'
